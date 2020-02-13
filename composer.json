@@ -1,0 +1,13 @@
+{
+    "name": "jonesiscoding/outperform-css",
+    "description": "Form styles with various label and custom field options.  Configure with SASS or use the precompiled CSS.",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "AMJones",
+            "email": "am@jonesiscoding.com"
+        }
+    ],
+    "require": {}
+}

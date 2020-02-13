@@ -1,0 +1,81 @@
+@import "../base/variables";
+@import "../mixins/form";
+
+.form-group-custom {
+  align-items: center;
+  display: flex;            // For browsers without grid
+  flex-flow: row nowrap;
+  font-size: $rules-input-font-size;
+  font-family: $rules-input-font-family;
+  line-height: $rules-input-line-height;
+  max-width: 100%;
+  min-width: 100%;
+  position: relative;       // Needed to contain some subelements
+  width: auto;
+  > label, .label-text, > .form-control, .form-text {
+    margin-bottom: 0;       // Override default in some browsers
+    max-width: 100%;
+    padding: $rules-input-padding-y $rules-input-padding-x;
+  }
+  > .form-control, .form-text {
+    border: $rules-input-border;
+    border-radius: $rules-input-border-radius;  
+    box-shadow: none;          // Override default in some browsers
+    @include field-disabled(); // Disabled Styles
+  }
+  > .form-control {
+    @include field-placeholder($rules-placeholder-color);
+  }
+  .form-text {
+    align-items: center;
+    display: flex;
+    font-size: $rules-input-font-size;
+    font-style: normal;
+    left: 0;
+    margin-top: 0;
+  }
+}
+
+//
+// Label Positioning
+//
+
+// Base (label above field, full size)
+// By specifying such an obnoxious selector, we avoid having to undo these styles for each separate style.
+form:not(.-horizontal):not(.-outline):not(.-floating) .form-group-custom:not(.-horizontal):not(.-outline):not(.-floating) {
+  flex-wrap: wrap;
+  > label, .label-text {
+    line-height: .9;
+  }
+  > label, .label-text, > .form-control, .form-text {
+    flex: 1 1 100%;
+  }
+}
+
+// Styles common to both float and outline labels
+.form-group-custom.-outline, form.-outline .form-group-custom,
+.form-group-custom.-floating, form.-floating .form-group-custom {
+  @include custom-floating-outline($rules-input-bg);
+}
+
+// Outline (Label appears within field border)
+.form-group-custom.-outline, form.-outline .form-group-custom {
+  @include custom-outline($rules-input-bg);
+}
+
+// Floating (Label appears as part of field border)
+.form-group-custom.-floating, form.-floating .form-group-custom {
+  @include custom-floating;
+}
+
+//
+// Custom Input Wrapper
+//
+.form-group-custom > .form-control-custom {
+  @include custom-input-wrapper();
+}
+form:not(.-outline):not(.-floating) .form-group-custom:not(.-outline):not(.-floating) > .form-control-custom {
+  // Add borders around the faux input, only if the parent style doesn't have them
+  border: $rules-input-border;
+  border-radius: $rules-input-border-radius;
+}

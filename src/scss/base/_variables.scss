@@ -1,0 +1,36 @@
+// DO NOT CHANGE THESE VALUES:  Instead, add your values to your own _custom.scss file, and import
+// this file AFTER those declarations. Your values will take precedence.
+
+// Colors
+$rules-input-bg:               if(variable-exists(input-bg),$input-bg, white) !default;
+$rules-input-color:            if(variable-exists(input-color),$input-color,#495057) !default;
+$rules-input-disabled-color:   rgba($rules-input-color,.75) !default;
+$rules-input-disabled-bg:      if(variable-exists(input-disabled-bg),$input-disabled-bg, #e9ecef) !default;
+$rules-placeholder-color:      if(variable-exists(input-placeholder-color), $input-placeholder-color, #6c757d) !default;
+
+// Fonts
+$rules-input-font-size:        if(variable-exists(input-font-size), $input-font-size, 1rem) !default;
+$rules-input-line-height:      if(variable-exists(input-line-height), $input-line-height, 1.5) !default;
+$rules-input-font-family:      if(variable-exists(input-font-family), $input-font-family, null) !default;
+
+// Spacing
+$rules-input-padding-x:        if(variable-exists(input-padding-x), $input-padding-x, .75rem) !default;
+$rules-input-padding-y:        if(variable-exists(input-padding-y), $input-padding-y, .375rem) !default;
+
+// Borders
+$rules-input-border-radius:    if(variable-exists(input-border-radius),$input-border-radius, .25rem) !default;
+$rules-input-border-width:     if(variable-exists(input-border-width), $input-border-width, 1px) !default;
+$rules-input-border-color:     if(variable-exists(input-border-color),$input-border-color, #ced4da) !default;
+$rules-input-border:           $rules-input-border-width solid $rules-input-border-color !default;
+
+// Symbols
+$rules-cursor-button:          pointer !default;        // Use 'null' to use browser default
+$rules-cursor-disabled:        not-allowed !default;    // Use 'null' to use browser default
+$rules-select-indicator:       url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%228%22%20height%3D%228%22%20viewBox%3D%220%200%208%208%22%3E%3Cpath%20fill%3D%22rgba%2873%2C%2080%2C%2087%2C%200.5%29%22%20d%3D%22M0%200l4%204%204-4h-8z%22%20transform%3D%22translate%280%202%29%22%20%2F%3E%3C%2Fsvg%3E") !default;
+
+//
+$rules-tag-color:              white !default;
+$rules-tag-bg:                  if(variable-exists(gray-600), $gray-600, #6c757d) !default;
+$rules-tag-border-radius:       $rules-input-border-radius !default;
+$rules-tag-border-color:        if(variable-exists(gray-700), $gray-700, #495057) !default;
+$rules-tag-padding:             2px !default;

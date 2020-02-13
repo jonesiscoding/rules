@@ -1,0 +1,24 @@
+pleasing:
+  filters:
+    pleasing_sass:
+      bin: "/usr/bin/sassc"
+      class: "XQ\\Pleasing\\Filter\\PleasingSassFilter"
+      output_style: expanded
+      import_paths:
+        - 'vendor/'
+      apply_to: '\.scss'
+    pleasing_prefix:
+      class: "XQ\\Pleasing\\Filter\\PleasingPrefixFilter"
+      apply_to: '\.scss'
+    pleasing_minify:
+      class: "XQ\\Pleasing\\Filter\\PleasingMinifyFilter"
+  assets:
+    rules_css:
+      inputs: 
+        - "src/scss/rules.scss"
+      output: "dist/css/rules.css"
+    rules_css_min:
+      filters: ['pleasing_minify']
+      inputs: 
+        - "src/scss/rules.scss"
+      output: "dist/css/rules.min.css"

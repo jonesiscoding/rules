@@ -1,0 +1,27 @@
+@import "../base/variables";
+@import "../mixins/form";
+
+.form-group-custom {
+  .form-control-custom.-tags {
+    > .tag {
+      order: -1;
+      > label {
+        display: none;
+        font-size: .75em; // relative
+        border: $rules-tag-border-color;
+        border-radius: $rules-tag-border-radius;
+        color: $rules-tag-color;
+        background-color: $rules-tag-bg;
+        padding: $rules-tag-padding;
+        margin: auto $rules-input-padding-y;
+      }
+      > input {
+        position: absolute;
+        left: -1000000px;
+        &:checked ~ label {
+          display: flex;
+        }
+      }
+    }
+  }
+}

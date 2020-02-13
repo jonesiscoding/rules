@@ -1,0 +1,17 @@
+.form-group-custom {
+  > input[type=datetime-local].form-control {
+    appearance: none;
+    background: transparent $rules-select-indicator no-repeat right $rules-input-padding-x center;
+    flex: 1 1 auto;
+    position: relative;
+    width: 100%;
+    z-index: 1;
+    &::-ms-expand {
+      opacity: 0; // Hides native caret in IE (Note: Pre IE10 will see NO arrow)
+    }
+    &:-moz-focusring {
+      color: transparent;         // Kills odd artifacts around text in Firefox focus
+      text-shadow: 0 0 0 #000;  // https://developer.mozilla.org/en-US/docs/Web/CSS/:-moz-focusring
+    }
+  }
+}
