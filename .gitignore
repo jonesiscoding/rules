@@ -2,3 +2,5 @@
 *.css.map
 *.sass.map
 *.scss.map
+/rules.code-workspace
+vendor
