@@ -1,0 +1,19 @@
+{
+    "name": "deviscoding/rules",
+    "homepage": "https://github.com/jonesiscoding/rules",
+    "version": "4.0",
+    "authors": [
+      {
+        "name": "AMJones",
+        "homepage": "https://www.deviscoding.com/"
+      }
+    ],
+    "license": "MIT",
+    "require": {
+      "deviscoding/palette": "^1.0"
+    },
+    "suggest": {
+      "deviscoding/device": "Javascript client hint library with an optional PHP backend.",
+      "deviscoding/poly-pointer": "A pointer:coarse psuedo-polyfill for older devices."
+    }
+  }
