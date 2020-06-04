@@ -15,6 +15,9 @@ $rules-feature-touch:         true !default;
 $rules-mobile-first:          false !default;
 $rules-desktop-first:         true !default;
 
+// Misc
+$rules-cursor-strong:         pointer;
+
 // Spacing
 $rules-spacer:                1rem !default;
 $rules-padding-x:             $rules-spacer !default;
@@ -56,6 +59,29 @@ $rules-font-weight-medium:    500 !default;
 $rules-font-weight-bold:      700 !default;
 
 $rules-line-height-base:      1.25 !default;
+
+// Tables Colors
+$rules-table-border-color:      $rules-pattern-border-color !default;
+$rules-table-color:             $rules-text-color !default;
+$rules-table-bg:                $rules-pattern-bg !default;
+$rules-table-hover-bg:          $rules-pattern-hover-bg !default;
+$rules-table-hover-color:       $rules-pattern-hover-color !default;
+
+$rules-table-head-color-weight: 600 !default;
+$rules-table-head-color:        get-gray($rules-table-head-color-weight) !default;
+$rules-table-head-weight:       $rules-font-weight-bold !default;
+$rules-table-head-active-color: get-gray($rules-table-head-color-weight + 300) !default;
+$rules-table-head-hover-color:  get-gray($rules-table-head-color-weight + 200) !default;
+
+// Tables Spacing
+$rules-table-align:             middle  !default;
+$rules-table-padding:           .375rem !default; // 6dp
+$rules-table-row-height:        3.25rem !default; // 52dp
+$rules-table-border-width:      $rules-pattern-border-width !default;
+$rules-table-border-radius:     $rules-pattern-border-radius !default;
+
+$rules-table-head-height:       3.5rem  !default;  // 56dp
+$rules-table-head-border-width: $rules-pattern-border-width*2 !default;
 
 // Responsive
 $rules-min-width:             320px !default;

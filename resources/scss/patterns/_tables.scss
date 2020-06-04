@@ -1,0 +1,54 @@
+table:not(.-native) {
+    border:          0 solid $rules-table-border-color;
+    border-collapse: collapse;
+    color:           $rules-table-color;
+    min-width:       100%;
+    table-layout:    fixed;
+    white-space:     nowrap;
+  
+    &:not(caption) > * > * {
+      // Basic Setup for Cells
+      background-color:    $rules-table-bg;
+      border-bottom-width: $rules-table-border-width;
+      height:              $rules-table-row-height;
+      padding-left:        $rules-table-padding;
+      padding-right:       $rules-table-padding;
+      vertical-align:      $rules-table-align;
+    }
+  
+    .-left { text-align: left; }
+    .-right, .-numeric { text-align: right; }
+    .-center { text-align: center; }
+  
+    &:not(.-hoverless) > tbody > tr:hover {
+      // Hover Shading for Cells
+      background-color: $rules-table-hover-bg;
+      color:            $rules-table-hover-color;
+    }
+  
+    > thead > tr > * {
+      border-bottom-width: $rules-table-head-border-width;
+      color:               $rules-table-head-color;
+      font-weight:         $rules-font-weight-bold;
+      height:              $rules-table-head-weight !important;
+  
+      > label {
+        margin-bottom: 0;
+      }
+  
+      > label[data-sort] {
+        color:       $rules-table-head-color;
+        cursor:      $rules-cursor-strong;
+        font-weight: $rules-font-weight-bold;
+  
+        &:before {
+          color:   $rules-table-head-color;
+          content: "\2193";
+        }
+  
+        &.-active:before {
+          color: $rules-table-head-active-color;
+        }
+      }
+    }
+  }

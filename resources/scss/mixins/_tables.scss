@@ -1,0 +1,125 @@
+
+
+// region //////////////////////////////////////////////// Forms Responsive Mixins
+
+@mixin responsive-down-tables($bp) {
+    @if $bp == "sm" {
+      table.-responsive,
+      table.-responsive > tbody {
+        display:        flex;
+        flex-direction: column;
+      }
+      table.-responsive > thead {
+        display: none;
+      }
+      table.-responsive > tbody > tr {
+        display:        flex;
+        flex-flow:      row wrap;
+        padding-top:    $rules-list-padding-y;
+        padding-bottom: $rules-list-padding-y;
+        width:          100%;
+  
+        & + tr {
+          border-top: 1px solid get-gray(200);
+        }
+  
+        & > td {
+          align-items:    center;
+          border-top:     none;
+          display:        flex;
+          height:         auto !important;
+          flex:           0 1 auto;
+          max-width:      100%;
+          overflow:       hidden;
+          padding-top:    .125rem;
+          padding-bottom: .125rem;
+          padding-left:   $rules-list-padding-x !important;
+          padding-right:  $rules-list-padding-x !important;
+          text-overflow:  ellipsis;
+          white-space:    nowrap;
+          width:          100%;
+        }
+  
+        & > td:before {
+          content:      attr(data-heading);
+          display:      inline-block;
+          flex:         0 0 25%;
+          font-weight:  $rules-font-weight-medium;
+          margin-right: $rules-list-padding-x;
+          text-align:   left;
+        }
+      }
+      h3 + table.-responsive > tbody > tr:first-child {
+        margin-top: $rules-list-padding-y;
+        border-top: $rules-table-border-width solid $rules-table-border-color;
+      }
+    }
+  
+    // Customize without repeating rules by creating this mixin
+    @if mixin-exists(custom-responsive-down-tables) {
+      //noinspection SassScssUnresolvedMixin
+      @include custom-responsive-down-tables($bp);
+    }
+  }
+  
+  @mixin responsive-up-tables($bp) {
+    // Customize without repeating rules by creating this mixin
+    @if mixin-exists(custom-responsive-up-tables) {
+      //noinspection SassScssUnresolvedMixin
+      @include custom-responsive-down-tables($bp);
+    }
+  }
+  
+  @mixin responsive-touch-tables {
+    // Customize without repeating rules by creating this mixin
+    @if mixin-exists(custom-responsive-touch-tables) {
+      //noinspection SassScssUnresolvedMixin
+      @include custom-responsive-touch-tables;
+    }
+  }
+  
+  @mixin responsive-hidpi-tables($dpi) {
+    // Customize without repeating rules by creating this mixin
+    @if mixin-exists(custom-responsive-hidpi-tables) {
+      //noinspection SassScssUnresolvedMixin
+      @include custom-responsive-hidpi-tables($dpi);
+    }
+  }
+  
+  // endregion ///////////////////////////////////////////// End Forms Responsive Mixins
+  
+  // region //////////////////////////////////////////////// Forms Browser Hack Mixins
+  
+  @mixin hacks-edge-tables {
+    // Customize without repeating rules by creating this mixin
+    @if mixin-exists(custom-hacks-edge-tables) {
+      //noinspection SassScssUnresolvedMixin
+      @include custom-hacks-edge-tables;
+    }
+  }
+  
+  @mixin hacks-firefox-tables {
+    // Customize without repeating rules by creating this mixin
+    @if mixin-exists(custom-hacks-firefox-tables) {
+      //noinspection SassScssUnresolvedMixin
+      @include custom-hacks-firefox-tables;
+    }
+  }
+  
+  @mixin hacks-ie-tables {
+    // Customize without repeating rules by creating this mixin
+    @if mixin-exists(custom-hacks-ie-tables) {
+      //noinspection SassScssUnresolvedMixin
+      @include custom-hacks-ie-tables;
+    }
+  }
+  
+  @mixin hacks-safari-tables {
+    // Customize without repeating rules by creating this mixin
+    @if mixin-exists(custom-hacks-safari-tables) {
+      //noinspection SassScssUnresolvedMixin
+      @include custom-hacks-safari-tables;
+    }
+  }
+  
+  // endregion ///////////////////////////////////////////// End Forms Browser Hack Mixins

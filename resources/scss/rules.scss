@@ -8,7 +8,9 @@
 }
 
 // Base Styles (includes link colors, basic typography, html resets)
-@import "base";
+@import "reset";
+// Patterns & Elements
+@import "patterns/tables";
 
 // Responsive Desktop First
 @if $rules-desktop-first {
