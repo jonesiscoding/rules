@@ -2,10 +2,10 @@ pleasing:
   assets:
     rules_css:
       inputs: 
-        - "src/scss/rules.scss"
+        - "resources/scss/rules.scss"
       output: "dist/css/rules.css"
     rules_css_min:
       filters: ['minify']
       inputs: 
-        - "src/scss/rules.scss"
+        - "resources/scss/rules.scss"
       output: "dist/css/rules.min.css"
