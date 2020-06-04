@@ -1,0 +1,61 @@
+/// Replace `$search` with `$replace` in `$string`
+/// @author Hugo Giraudel
+/// @param {String} $string - Initial string
+/// @param {String} $search - Substring to replace
+/// @param {String} $replace ('') - New value
+/// @return {String} - Updated string
+@function str-replace($string, $search, $replace: '') {
+  $index: str-index($string, $search);
+
+  @if $index {
+    @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+  }
+
+  @return $string;
+}
+
+/// Reverse the order of a SASS list
+/// @author Hugo Giraudel
+/// @param {List} $$list - Initial list
+/// @param {Boolean} $recursive - Process recursively
+/// @return {List} - Updated list
+@function list-reverse($list, $recursive: false) {
+  $result: ();
+
+  @for $i from length($list) * -1 through -1 {
+    @if type-of(nth($list, abs($i))) == list and $recursive {
+      $result: append($result, reverse(nth($list, abs($i)), $recursive));
+    } @else {
+      $result: append($result, nth($list, abs($i)));
+    }
+  }
+
+  @return $result;
+}
+
+// Returns selector for targeting a specific browser based on a user
+// agent placed in the HTML tag by xq-detect.  As user agents can easily
+// be spoofed, this should only be used for minimal 'hacks'.
+@function _ua-target($browser, $version: null, $negate: false, $user-agents: $rules-user-agent) {
+  $sep: '';
+  @if map-has-key($user-agents,$browser) {
+    $ua:     unquote(map-get($user-agents, $browser));
+
+    @if $version {
+      @if $browser == "windows" {
+        $sep: unquote(" ");
+      } @else if $browser == "mac" {
+        $sep: unquote(" ");
+        $version: str-replace($version,'.','_');
+      } @else {
+        $sep: unquote("/");
+      }
+    }
+
+    $ua-sel: unquote('[data-user-agent*="#{$ua}#{$sep}#{$version}"]');
+
+    @return if($negate,unquote(":not(#{$ua-sel})"),$ua-sel);
+  }
+
+  @return null;
+}

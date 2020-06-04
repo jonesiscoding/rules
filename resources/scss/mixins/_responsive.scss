@@ -1,0 +1,353 @@
+@import "../base/functions";
+@import "../base/variables";
+
+// region //////////////////////////////////////////////// Browser Targeting
+
+@mixin only-ua($ua) {
+  $target: _ua-target($ua);
+  html#{$target} {
+    @content;
+  }
+}
+
+@mixin only-edge-html() {
+  @supports (-ms-ime-align:auto) {
+    @content;
+  }
+}
+
+@mixin only-firefox() {
+  @supports (-moz-appearance:meterbar) {
+    @content
+  }
+}
+
+@mixin only-ie() {
+  @include only-ua("ie") {
+    @content;
+  }
+}
+
+@mixin only-safari($version: null) {
+  $target: _ua-target("safari", $version);
+  html#{$target} {
+    @content;
+  }
+}
+
+// endregion ///////////////////////////////////////////// End Browser Targeting
+
+// region //////////////////////////////////////////////// Feature Targeting
+
+// Target Only Devices with coarse pointers
+//
+// Works in browsers supporting pointer:coarse OR when using poly-pointer.js
+@mixin only-coarse() {
+  @media handheld, screen and (pointer: coarse) {
+    @content;
+  }
+}
+
+// Targets Only Devices with HiDPI / Retina screens
+@mixin only-hidpi($dpi) {
+  $ratio: $dpi/ 96;
+  @media
+    only screen and (-webkit-min-device-pixel-ratio: #{$ratio}),
+    only screen and (min-device-pixel-ratio: #{$ratio}),
+    only screen and (min-resolution: #{$dpi}dpi),
+    only screen and (min-resolution: #{$ratio}dppx) {
+      @content;
+    }
+}
+
+// Target Only Browsers Supporting display: flex (Requires device.js)
+//
+// We can't use @supports here because there are browsers that support flex but do not
+// support @supports.  Therefore, this mixin requires our device.js javscript helper.
+@mixin only-flex() {
+  html:not(.-f-cdf) {
+    @content;
+  }
+}
+
+// Target Only Browsers supporting display: grid
+//
+// Browsers that support the feature with prefixes are not targeted by this mixin. Due to the
+// non-standard implementation that those browsers use, it is often not ideal to target them with
+// the same set of CSS rules.
+@mixin only-grid() {
+  @supports(display:grid) {
+    @content;
+  }
+}
+
+// Target Only Devices with coarse pointers
+//
+// Works in browsers supporting pointer:coarse OR when using poly-pointer.js
+@mixin only-touch() {
+  @media handheld, screen and (pointer: coarse) {
+    @content;
+  }
+}
+
+// endregion ///////////////////////////////////////////// End Feature Targeting
+
+// region //////////////////////////////////////////////// OS Targeting
+
+// Note that all of these require the user agent added to the data-user-agent attribute of the HTML tag,
+// as is done by our device.js.
+//
+// As these mixins use a user agent, they should be used sparingly. Please target features if possible!
+
+@mixin only-android() {
+  @include only-ua("android") {
+    @content;
+  }
+}
+
+@mixin only-ios() {
+  @include only-ua("ios") {
+    @content;
+  }
+}
+
+@mixin only-mac($version: null) {
+  @include only-ua("ios", $version) {
+    @content;
+  }
+}
+
+@mixin only-windows($version: null) {
+  @include only-ua("ios", $version) {
+    @content;
+  }
+}
+
+// endregion ///////////////////////////////////////////// End OS Targeting
+
+// region //////////////////////////////////////////////// Viewport Targeting
+
+@function get-breakpoint-next($name, $breakpoints: $rules-breakpoints-up) {
+  $bn: map-keys($breakpoints);
+  $ix: index($bn, $name);
+
+  @return if($ix < length($bn), nth($bn, $ix + 1), null);
+}
+
+@function get-breakpoint-min($name, $breakpoints: $rules-breakpoints-up) {
+  @if map-has-key($breakpoints, $name) {
+    $m: map-get($breakpoints, $name);
+    @return if($m != 0, $m, null);
+  } @else {
+    @error "The provided breakpoints variable does not have a '#{$name}' key.";
+  }
+}
+
+@function get-breakpoint-max($name, $breakpoints: $rules-breakpoints-up) {
+  @if map-has-key($breakpoints, $name) {
+    $nx: get-breakpoint-next($name, $breakpoints);
+    @return if($nx, map-get($breakpoints, $nx) - 0.02, null);
+  } @else {
+    @error "The provided breakpoints variable does not have a '#{$name}' key.";
+  }
+}
+
+
+@mixin viewport-between($min,$max, $adjust: true) {
+  @if $max {
+    $real-min: if($min, $min, 0);
+    $real-max: if($adjust, $max - 0.02, $max);
+    @media screen and (min-width: #{$real-min}) and (max-width: #{$real-max}) {
+      @content;
+    }
+  } @else {
+    @include viewport-up($min);
+  }
+}
+
+@mixin viewport-up($min) {
+  @if $min {
+    @media screen and (min-width: #{$min}) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
+
+@mixin viewport-down($max, $adjust: true) {
+  @if $max {
+    $real-max: if($adjust, $max - 0.02, $max);
+    @media screen and (max-width: #{$max}) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
+
+@mixin only-breakpoint($bp, $rules-breakpoints: $rules-breakpoints-up) {
+  $min: get-breakpoint-min(sm);
+  $max: get-breakpoint-max(sm);
+  @include viewport-between($min, $max, false) {
+    @content;
+  }
+}
+
+@mixin breakpoint-up($bp, $breakpoints: $rules-breakpoints-up) {
+  $min: get-breakpoint-min($bp, $breakpoints);
+  @include viewport-up($min) {
+    @content;
+  }
+}
+
+@mixin breakpoint-down($bp, $breakpoints: $rules-breakpoints-up) {
+  $max: get-breakpoint-max($bp, $breakpoints);
+  @include viewport-down($max, false) {
+    @content;
+  }
+}
+
+// Convenience Mixins
+
+@mixin only-xs() {
+  @include only-breakpoint(xs, $rules-breakpoints-up) {
+    @content;
+  }
+}
+
+@mixin only-sm() {
+  @include only-breakpoint(sm, $rules-breakpoints-up) {
+    @content;
+  }
+}
+
+@mixin only-md() {
+  @include only-breakpoint(md, $rules-breakpoints-up) {
+    @content;
+  }
+}
+
+@mixin only-lg() {
+  @include only-breakpoint(lg, $rules-breakpoints-up) {
+    @content;
+  }
+}
+
+@mixin only-xl() {
+  @include breakpoint-up(xl, $rules-breakpoints-up) {
+    @content;
+  }
+}
+
+@mixin lg-down() {
+  @include breakpoint-down(lg, $rules-breakpoints-up) {
+    @content;
+  }
+}
+
+@mixin md-down() {
+  @include breakpoint-down(md, $rules-breakpoints-up) {
+    @content;
+  }
+}
+
+@mixin sm-down() {
+  @include breakpoint-down(sm, $rules-breakpoints-up) {
+    @content;
+  }
+}
+
+@mixin sm-up() {
+  @include breakpoint-up(sm, $rules-breakpoints-up) {
+    @content;
+  }
+}
+
+@mixin md-up() {
+  @include breakpoint-up(md, $rules-breakpoints-up) {
+    @content;
+  }
+}
+
+@mixin lg-up() {
+  @include breakpoint-up(lg, $rules-breakpoints-up) {
+    @content;
+  }
+}
+
+@mixin sm-down-coarse() {
+  @include only-coarse {
+    @include sm-down {
+      @content;
+    }
+  }
+}
+
+@mixin only-xs-coarse() {
+  @include only-coarse {
+    @include only-xs {
+      @content;
+    }
+  }
+}
+
+@mixin only-sm-coarse() {
+  @include only-coarse {
+    @include only-sm {
+      @content;
+    }
+  }
+}
+
+// endregion ///////////////////////////////////////////// End Viewport Targeting
+
+// region //////////////////////////////////////////////// Typography Responsive Mixins
+
+@mixin responsive-touch-rwd {
+  :root {
+    --is-touch: true;
+  }
+}
+
+@mixin responsive-hidpi-rwd($dpi) {
+  @content;
+}
+
+@mixin responsive-down-rwd($bp) {
+  @if $rules-desktop-first and not $rules-mobile-first {
+    :root { --viewport: #{$bp}; }
+    @if $rules-feature-hacks {
+      @include hacks-ie-viewport($bp);
+    }
+  }
+}
+
+@mixin responsive-up-rwd($bp) {
+  @if $rules-mobile-first {
+    :root { --viewport: #{$bp}; }
+    @if $rules-feature-hacks {
+      @include hacks-ie-viewport($bp);
+    }
+  }
+}
+
+@mixin hacks-ie-viewport($bp) {
+  @include only-ie {
+    &::after {
+      display: none;
+      content: '#{$bp}';
+    }
+  }
+}
+
+@mixin hacks-ie-minimum($ie-min-bp: $rules-ie-min-bp) {
+  @if $ie-min-bp {
+    $width: get-breakpoint-min($ie-min-bp);
+    @include viewport-down($width, false) {
+      @-ms-viewport{ width: #{$width}; }
+    }
+  }
+}
+
+// endregion ///////////////////////////////////////////// End Typography Responsive Mixins

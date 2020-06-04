@@ -1,0 +1,109 @@
+@import "includes";
+
+:root {
+  --font-monospace: #{$rules-family-monospace};
+  --font-normal:    #{$rules-family-base};
+  --font-size-root: #{$rules-font-size-root};
+  --text-color:     #{$rules-text-color};
+
+  // Used by JS Components
+  --min-width:      #{$rules-min-width};
+  --viewport:       'xl';
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+// region //////////////////////////////////////////////// Typography & Spacing
+
+html {
+  //noinspection ALL
+  font-size:           $rules-font-size-root; // Fallback
+  //noinspection ALL
+  font-size:           var(--font-size-root);
+  text-rendering:      optimizeLegibility;
+  //noinspection CssInvalidPropertyValue
+  -webkit-text-stroke: 0.20px;
+}
+
+body {
+  background-color: $rules-body-bg;
+  color: $rules-text-color;
+  //noinspection ALL
+  font-family: $rules-family-base;
+  //noinspection ALL
+  font-family: var(--font-normal);
+  font-size: 1rem;
+  font-weight: $rules-font-weight-base;
+  line-height: $rules-line-height-base;
+  margin: 0;
+  -webkit-tap-highlight-color: rgba(#000, 0);
+  -webkit-text-size-adjust: 100%;
+}
+
+b, strong {
+  font-weight: $rules-font-weight-bold;
+}
+
+h1, h2, h3, h4, h5, h6, p, ol, ul, dl, pre {
+  margin-top: 0;
+}
+
+pre, code, kbd, samp {
+  //noinspection ALL
+  font-family: $rules-family-monospace; // Fallback
+  //noinspection ALL
+  font-family: var(--font-monospace);
+  font-size: 1rem;
+}
+
+small {
+  font-size: $rules-font-size-sm;
+}
+
+// endregion ///////////////////////////////////////////// End Typography & Spacing
+
+// region //////////////////////////////////////////////// Elements
+
+article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
+  display: block;
+}
+
+output {
+  display: inline-block;
+}
+
+progress {
+  vertical-align: baseline;
+}
+
+img, svg {
+  vertical-align: middle;
+}
+
+svg {
+  overflow: hidden;
+}
+
+summary {
+  display: list-item; // 1
+  cursor: pointer;
+}
+
+template {
+  display: none;
+}
+
+
+// endregion ///////////////////////////////////////////// End Elements
+
+a {
+  color: $rules-link-color;
+  text-decoration: $rules-link-decoration;
+
+  &:hover {
+    color: $rules-link-hover-color;
+    text-decoration: $rules-link-hover-decoration;
+  }
+}

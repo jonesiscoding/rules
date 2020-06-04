@@ -1,0 +1,43 @@
+// DO NOT CHANGE THESE VALUES:  Instead, add your values to your own _custom.scss file, and import
+// this file as the LAST line of those declarations.
+
+@import "deviscoding/palette/resources/scss/functions";
+@import "deviscoding/palette/resources/scss/variables";
+
+// Feature Switches
+$rules-feature-fixed-header:  true !default;
+$rules-feature-hacks:         true !default;
+$rules-feature-hidpi:         true !default;
+$rules-feature-sticky-footer: true !default;
+$rules-feature-touch:         true !default;
+
+// Typography
+$rules-family-base:           system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
+$rules-family-monospace:      "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace !default;
+
+$rules-font-size-touch:       16px !default;
+$rules-font-size-root:        14px !default;
+$rules-font-size-sm:          85% !default;
+
+$rules-font-weight-base:      400 !default;
+$rules-font-weight-medium:    500 !default;
+$rules-font-weight-bold:      700 !default;
+
+$rules-line-height-base:      1.25 !default;
+
+// Responsive Order Switches (both can be true)
+$rules-mobile-first:          false !default;
+$rules-desktop-first:         true !default;
+
+// Responsive
+$rules-min-width:             320px !default;
+$rules-ie-min-bp:             sm !default;
+$rules-breakpoints-up:        (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px) !default;
+$rules-breakpoints-dpi:       (150) !default;
+$rules-user-agent:            (
+                                 "ie":      "Trident",
+                                 "edge":    "Edge",
+                                 "safari":  "Version",
+                                 "windows": "Windows NT",
+                                 "mac":     "Macintosh; Intel Mac OS X"
+                              ) !default;
