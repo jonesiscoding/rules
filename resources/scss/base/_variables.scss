@@ -11,6 +11,38 @@ $rules-feature-hidpi:         true !default;
 $rules-feature-sticky-footer: true !default;
 $rules-feature-touch:         true !default;
 
+// Responsive Order Switches (both can be true)
+$rules-mobile-first:          false !default;
+$rules-desktop-first:         true !default;
+
+// Spacing
+$rules-spacer:                1rem !default;
+$rules-padding-x:             $rules-spacer !default;
+$rules-padding-y:             $rules-spacer/2 !default;
+
+$rules-header-height:         64px !default;
+$rules-touch-target:          3rem !default;  // 48dp
+
+$rules-pattern-padding-x:     $rules-padding-x !default;
+$rules-pattern-padding-y:     $rules-padding-y !default;
+$rules-pattern-border-width:  1px !default;
+$rules-pattern-border-radius: 4px !default;
+
+// Colors
+$rules-text-color:            #000 !default;
+$rules-body-bg:               #fff !default;
+
+$rules-link-color:            $blue-700 !default;
+$rules-link-hover-color:      $blue-500 !default;
+
+$rules-link-decoration:       underline !default;
+$rules-link-hover-decoration: none !default;
+
+$rules-pattern-bg:            #fff !default;
+$rules-pattern-hover-bg:      get-gray(100) !default;
+$rules-pattern-hover-color:   get-gray(800) !default;
+$rules-pattern-border-color:  get-gray(300) !default;
+
 // Typography
 $rules-family-base:           system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
 $rules-family-monospace:      "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace !default;
@@ -24,10 +56,6 @@ $rules-font-weight-medium:    500 !default;
 $rules-font-weight-bold:      700 !default;
 
 $rules-line-height-base:      1.25 !default;
-
-// Responsive Order Switches (both can be true)
-$rules-mobile-first:          false !default;
-$rules-desktop-first:         true !default;
 
 // Responsive
 $rules-min-width:             320px !default;

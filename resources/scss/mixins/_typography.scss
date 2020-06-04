@@ -1,0 +1,102 @@
+
+@import "../base/functions";
+@import "../base/variables";
+
+// region //////////////////////////////////////////////// Typography Responsive Mixins
+
+@mixin responsive-touch-typography {
+  :root {
+    --font-size-root: #{$rules-font-size-touch};
+  }
+
+  // Customize without repeating rules by creating this mixin
+  @if mixin-exists(custom-responsive-touch-typography) {
+    //noinspection SassScssUnresolvedMixin
+    @include custom-responsive-touch-typography;
+  }
+}
+
+@mixin responsive-hidpi-typography($dpi) {
+  // Turn off some font optimizations for low res screens
+  // 1 - Firefox MacOS
+  // 2 - Chrome/Safari
+  // 3 - EdgeHTML/IE11
+  html {
+    -moz-osx-font-smoothing: grayscale; // 1
+    //noinspection CssInvalidPropertyValue
+    -webkit-text-stroke: 0; // 2
+  }
+
+  $only-explorer:  _ua-target('ie');
+  $only-edge-html: _ua-target('edge');
+  #{$only-explorer}, #{$only-edge-html} {
+    text-shadow: none; // 3
+  }
+
+  // Customize without repeating rules by creating this mixin
+  @if mixin-exists(custom-responsive-hidpi-typography) {
+    //noinspection SassScssUnresolvedMixin
+    @include custom-responsive-hidpi-typography($dpi);
+  }
+}
+
+@mixin responsive-down-typography($bp) {
+
+  // Customize without repeating rules by creating this mixin
+  @if mixin-exists(custom-responsive-down-typography) {
+    //noinspection SassScssUnresolvedMixin
+    @include custom-responsive-down-typography($bp);
+  }
+}
+
+@mixin responsive-up-typography($bp) {
+
+  // Customize without repeating rules by creating this mixin
+  @if mixin-exists(custom-responsive-up-typography) {
+    //noinspection SassScssUnresolvedMixin
+    @include custom-responsive-down-typography($bp);
+  }
+}
+
+
+// endregion ///////////////////////////////////////////// End Typography Responsive Mixins
+
+// region //////////////////////////////////////////////// Typography Browser Hack Mixins
+
+@mixin hacks-edge-typography {
+  text-shadow: 0 0 1px rgba(0,0,0,0.2); // Faux Text Shadow for legibility. Overridden at HiDPI
+
+  // Customize without repeating rules by creating this mixin
+  @if mixin-exists(custom-hacks-edge-typography) {
+    //noinspection SassScssUnresolvedMixin
+    @include custom-hacks-edge-typography;
+  }
+}
+
+@mixin hacks-firefox-typography {
+  // Customize without repeating rules by creating this mixin
+  @if mixin-exists(custom-hacks-firefox-typography) {
+    //noinspection SassScssUnresolvedMixin
+    @include custom-hacks-firefox-typography;
+  }
+}
+
+@mixin hacks-ie-typography {
+  text-shadow: 0 0 1px rgba(0,0,0,0.1); // Faux Text Shadow for legibility.  Overridden at HiDPI
+
+  // Customize without repeating rules by creating this mixin
+  @if mixin-exists(custom-hacks-ie-typography) {
+    //noinspection SassScssUnresolvedMixin
+    @include custom-hacks-ie-typography;
+  }
+}
+
+@mixin hacks-safari-typography {
+  // Customize without repeating rules by creating this mixin
+  @if mixin-exists(custom-hacks-safari-typography) {
+    //noinspection SassScssUnresolvedMixin
+    @include custom-hacks-safari-typography;
+  }
+}
+
+// endregion ///////////////////////////////////////////// End Typography Browser Hack Mixins
