@@ -3,4 +3,5 @@
 *.sass.map
 *.scss.map
 /rules.code-workspace
-vendor
+vendor/
+composer.lock
