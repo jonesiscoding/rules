@@ -112,13 +112,13 @@
 }
 
 @mixin only-mac($version: null) {
-  @include only-ua("ios", $version) {
+  @include only-ua("mac", $version) {
     @content;
   }
 }
 
 @mixin only-windows($version: null) {
-  @include only-ua("ios", $version) {
+  @include only-ua("windows", $version) {
     @content;
   }
 }
@@ -344,9 +344,7 @@
 @mixin hacks-ie-minimum($ie-min-bp: $rules-ie-min-bp) {
   @if $ie-min-bp {
     $width: get-breakpoint-min($ie-min-bp);
-    @include viewport-down($width, false) {
-      @-ms-viewport{ width: #{$width}; }
-    }
+    @-ms-viewport{ width: #{$width}; }
   }
 }
 
